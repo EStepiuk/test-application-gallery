@@ -9,5 +9,7 @@ object BaseContract {
 
         var view: V?
         var router: R?
+
+        fun onDispose() {}
     }
 }

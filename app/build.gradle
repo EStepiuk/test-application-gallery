@@ -1,6 +1,7 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
 
 android {
     compileSdkVersion 26
@@ -61,4 +62,9 @@ dependencies {
 
     implementation 'org.jetbrains.anko:anko-commons:0.10.2'
     implementation 'org.jetbrains.anko:anko-design:0.10.2'
+
+    kapt 'frankiesardo:icepick-processor:3.2.0'
+    implementation 'frankiesardo:icepick:3.2.0'
+
+    implementation 'com.jakewharton.timber:timber:4.5.1'
 }

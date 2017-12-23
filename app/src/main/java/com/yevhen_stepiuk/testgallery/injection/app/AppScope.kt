@@ -1,4 +1,4 @@
-package com.yevhen_stepiuk.testgallery.injection.scope
+package com.yevhen_stepiuk.testgallery.injection.app
 
 import javax.inject.Scope
 

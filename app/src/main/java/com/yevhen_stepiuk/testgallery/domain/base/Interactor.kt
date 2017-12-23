@@ -1,7 +1,7 @@
 package com.yevhen_stepiuk.testgallery.domain.base
 
 
-import com.yevhen_stepiuk.testgallery.injection.DomainModule
+import com.yevhen_stepiuk.testgallery.injection.app.DomainModule
 import io.reactivex.Scheduler
 import io.reactivex.disposables.CompositeDisposable
 import javax.inject.Inject

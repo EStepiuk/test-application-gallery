@@ -17,7 +17,7 @@ abstract class BasePresenter<V : BaseContract.View, R : BaseContract.Router> : B
     private val routerMaybe get() = routerSubject.singleElement()
     private val disposables = CompositeDisposable()
 
-    open fun onDispose() {
+    override fun onDispose() {
         disposables.clear()
     }
 

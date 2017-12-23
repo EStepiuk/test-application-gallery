@@ -1,6 +1,5 @@
-package com.yevhen_stepiuk.testgallery.injection
+package com.yevhen_stepiuk.testgallery.injection.app
 
-import com.yevhen_stepiuk.testgallery.injection.scope.AppScope
 import dagger.Module
 import dagger.Provides
 import io.reactivex.Scheduler
