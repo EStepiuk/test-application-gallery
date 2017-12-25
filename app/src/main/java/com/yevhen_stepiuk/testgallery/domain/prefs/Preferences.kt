@@ -5,4 +5,6 @@ interface Preferences {
 
     val isLoggedIn: Boolean
     val avatarUriString: String?
+
+    fun reset()
 }

@@ -1,11 +1,10 @@
-package com.yevhen_stepiuk.testgallery.injection
+package com.yevhen_stepiuk.testgallery.injection.app
 
 import android.content.Context
 import com.google.gson.Gson
 import com.yevhen_stepiuk.testgallery.BuildConfig
 import com.yevhen_stepiuk.testgallery.R
 import com.yevhen_stepiuk.testgallery.data.api.GalleryAPI
-import com.yevhen_stepiuk.testgallery.injection.app.AppScope
 import dagger.Module
 import dagger.Provides
 import okhttp3.Cache
@@ -30,7 +29,7 @@ class NetModule {
     @AppScope
     internal fun provideOkHttpClient(cache: Cache): OkHttpClient = OkHttpClient.Builder()
             .cache(cache)
-            .apply { if (BuildConfig.DEBUG) addInterceptor(HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY)) }
+            .let { if (BuildConfig.DEBUG) it.addInterceptor(HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY)) else it }
             .build()
 
     @Provides

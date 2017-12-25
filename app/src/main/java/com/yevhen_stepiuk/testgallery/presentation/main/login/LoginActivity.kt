@@ -9,7 +9,7 @@ import android.support.annotation.LayoutRes
 import android.support.v4.content.ContextCompat
 import android.view.View.INVISIBLE
 import android.view.View.VISIBLE
-import com.squareup.picasso.Picasso
+import com.bumptech.glide.Glide
 import com.yevhen_stepiuk.testgallery.GalleryApp
 import com.yevhen_stepiuk.testgallery.R
 import com.yevhen_stepiuk.testgallery.domain.authorization.errors.AuthorizationException
@@ -20,20 +20,17 @@ import com.yevhen_stepiuk.testgallery.extension.getErrorMessage
 import com.yevhen_stepiuk.testgallery.extension.input
 import com.yevhen_stepiuk.testgallery.extension.resizePolitly
 import com.yevhen_stepiuk.testgallery.presentation.base.BaseActivity
+import com.yevhen_stepiuk.testgallery.presentation.main.main.MainActivity
 import icepick.State
 import kotlinx.android.synthetic.main.login_activity.*
 import org.jetbrains.anko.design.snackbar
 import org.jetbrains.anko.dip
 import org.jetbrains.anko.indeterminateProgressDialog
-import timber.log.Timber
-import javax.inject.Inject
 
 
 class LoginActivity : BaseActivity<LoginContract.LoginPresenter>(), LoginContract.LoginView, LoginContract.LoginRouter {
 
     @get:LayoutRes override val layoutRes: Int get() = R.layout.login_activity
-
-    @Inject internal lateinit var picasso: Picasso
 
     @JvmField
     @State
@@ -109,8 +106,8 @@ class LoginActivity : BaseActivity<LoginContract.LoginPresenter>(), LoginContrac
     }
 
     override fun openMainScreen() {
-        //TODO: implement
-        Timber.d("openMainScreen()")
+        startActivity(Intent(this, MainActivity::class.java))
+        finish()
     }
 
     override fun openChooseAvatarScreenForResult() {
@@ -132,7 +129,7 @@ class LoginActivity : BaseActivity<LoginContract.LoginPresenter>(), LoginContrac
     }
 
     override fun inject() {
-        GalleryApp.getComponent(this).inject(this)
+        GalleryApp.getLoginComponent(this).inject(this)
     }
 
     override fun onSetupView(savedInstanceState: Bundle?) {
@@ -182,8 +179,9 @@ class LoginActivity : BaseActivity<LoginContract.LoginPresenter>(), LoginContrac
     private fun onSetAvatarUriString(uriString: String?) {
         if (uriString != null) {
             imgAvatar.clearColorFilter()
-            picasso.load(uriString)
-                    .resizePolitly(dip(128), dip(128))
+            Glide.with(this)
+                    .load(uriString)
+                    .resizePolitly(dip(128))
                     .into(imgAvatar)
         } else {
             imgAvatar.setImageResource(R.drawable.ic_add_a_photo_128dp)

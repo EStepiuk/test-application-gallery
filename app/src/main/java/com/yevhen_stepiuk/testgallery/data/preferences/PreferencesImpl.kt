@@ -7,4 +7,8 @@ class PreferencesImpl(private val prefsWrapper: SharedPrefsWrapper) : Preference
 
     override val isLoggedIn: Boolean get() = prefsWrapper.apiToken != null
     override val avatarUriString: String? get() = prefsWrapper.avatarUriString
+
+    override fun reset() {
+        prefsWrapper.reset()
+    }
 }

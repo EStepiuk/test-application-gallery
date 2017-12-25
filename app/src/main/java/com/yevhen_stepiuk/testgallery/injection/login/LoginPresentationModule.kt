@@ -1,4 +1,4 @@
-package com.yevhen_stepiuk.testgallery.injection.app
+package com.yevhen_stepiuk.testgallery.injection.login
 
 import com.yevhen_stepiuk.testgallery.domain.authorization.LoginInteractor
 import com.yevhen_stepiuk.testgallery.domain.authorization.SingUpInteractor
@@ -9,10 +9,10 @@ import dagger.Provides
 
 
 @Module
-class PresentationModule {
+class LoginPresentationModule {
 
     @Provides
-    @AppScope
+    @LoginScope
     internal fun provideLoginPresenter(loginInteractor: LoginInteractor,
                                        signUpInteractor: SingUpInteractor): LoginContract.LoginPresenter =
             LoginPresenter(loginInteractor, signUpInteractor)

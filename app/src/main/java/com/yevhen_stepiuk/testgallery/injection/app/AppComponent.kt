@@ -1,9 +1,12 @@
 package com.yevhen_stepiuk.testgallery.injection.app
 
-import com.yevhen_stepiuk.testgallery.injection.NetModule
-import com.yevhen_stepiuk.testgallery.presentation.main.login.LoginActivity
+import com.yevhen_stepiuk.testgallery.GalleryApp
+import com.yevhen_stepiuk.testgallery.injection.authorized.AuthorizedComponent
+import com.yevhen_stepiuk.testgallery.injection.login.LoginComponent
+import com.yevhen_stepiuk.testgallery.presentation.main.main.GifDialog
 import com.yevhen_stepiuk.testgallery.presentation.main.splash.SplashActivity
 import dagger.Component
+import okhttp3.OkHttpClient
 
 
 @AppScope
@@ -11,7 +14,6 @@ import dagger.Component
         modules = [
             AppModule::class,
             DomainModule::class,
-            PresentationModule::class,
             NetModule::class,
             UtilModule::class,
             DataModule::class
@@ -19,6 +21,16 @@ import dagger.Component
 )
 interface AppComponent {
 
-    fun inject(loginActivity: LoginActivity)
-    fun inject(loginActivity: SplashActivity)
+    fun inject(galleryApp: GalleryApp)
+
+    fun inject(splashActivity: SplashActivity)
+
+    fun inject(gifDialog: GifDialog)
+
+    fun loginSubcomponentBuilder(): LoginComponent.Builder
+
+    fun authorizedSubcomponentBuilder(): AuthorizedComponent.Builder
+
+    //This used to provide OkHttpClient to GlideConfiguration
+    fun provideOkHttpClient(): OkHttpClient
 }

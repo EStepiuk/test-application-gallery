@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity
 import com.yevhen_stepiuk.testgallery.GalleryApp
 import com.yevhen_stepiuk.testgallery.domain.prefs.Preferences
 import com.yevhen_stepiuk.testgallery.presentation.main.login.LoginActivity
+import com.yevhen_stepiuk.testgallery.presentation.main.main.MainActivity
 import javax.inject.Inject
 
 
@@ -18,7 +19,7 @@ class SplashActivity : AppCompatActivity() {
         inject()
 
         if (preferences.isLoggedIn) {
-            //TODO: start MainActivity
+            startActivity(Intent(this, MainActivity::class.java))
         } else {
             startActivity(Intent(this, LoginActivity::class.java))
         }
