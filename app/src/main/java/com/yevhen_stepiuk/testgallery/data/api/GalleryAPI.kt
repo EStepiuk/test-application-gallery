@@ -1,5 +1,6 @@
 package com.yevhen_stepiuk.testgallery.data.api
 
+import com.yevhen_stepiuk.testgallery.data.api.body.AddPhotoResponse
 import com.yevhen_stepiuk.testgallery.data.api.body.AllPhotosResponse
 import com.yevhen_stepiuk.testgallery.data.api.body.GifResponse
 import com.yevhen_stepiuk.testgallery.data.api.body.LoginResponse
@@ -27,4 +28,13 @@ interface GalleryAPI {
 
     @GET("gif")
     fun getGif(@Header("token") token: String): Single<GifResponse>
+
+    @Multipart
+    @POST("image")
+    fun addImage(@Header("token") token: String,
+                 @Part("description") description: String,
+                 @Part("hashtag") hashtag: String,
+                 @Part("latitude") latitude: Double,
+                 @Part("longitude") longitude: Double,
+                 @Part imagePart: MultipartBody.Part): Single<AddPhotoResponse>
 }

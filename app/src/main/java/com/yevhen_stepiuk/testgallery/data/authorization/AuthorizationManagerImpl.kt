@@ -4,14 +4,14 @@ import android.content.ContentResolver
 import android.net.Uri
 import com.google.gson.Gson
 import com.yevhen_stepiuk.testgallery.data.api.GalleryAPI
-import com.yevhen_stepiuk.testgallery.data.api.body.CreateError
+import com.yevhen_stepiuk.testgallery.data.api.body.CompositeError
 import com.yevhen_stepiuk.testgallery.data.api.body.ErrorBody
 import com.yevhen_stepiuk.testgallery.data.api.body.LoginResponse
 import com.yevhen_stepiuk.testgallery.data.preferences.SharedPrefsWrapper
 import com.yevhen_stepiuk.testgallery.domain.authorization.AuthorizationManager
 import com.yevhen_stepiuk.testgallery.domain.authorization.entity.LoginParam
 import com.yevhen_stepiuk.testgallery.domain.authorization.entity.SignUpParam
-import com.yevhen_stepiuk.testgallery.domain.authorization.errors.*
+import com.yevhen_stepiuk.testgallery.domain.authorization.errors.AuthorizationException
 import io.reactivex.Single
 import okhttp3.MediaType
 import okhttp3.MultipartBody
@@ -49,16 +49,8 @@ class AuthorizationManagerImpl(private val galleryAPI: GalleryAPI,
             }
             .onErrorResumeNext {
                 if (it is HttpException) {
-                    val createError = gson.fromJson(it.response().errorBody()?.charStream(), CreateError::class.java)
-                    val throwable = createError?.children?.let {
-                        when {
-                            it.emailErrors.error != null -> EmailError(it.emailErrors.error)
-                            it.usernameErrors.error != null -> UsernameError(it.usernameErrors.error)
-                            it.passwordErrors.error != null -> PasswordError(it.passwordErrors.error)
-                            it.avatarErrors.error != null -> AvatarError(it.avatarErrors.error)
-                            else -> null
-                        }
-                    }
+                    val createError = gson.fromJson(it.response().errorBody()?.charStream(), CompositeError::class.java)
+                    val throwable = createError?.children?.let { AuthorizationExceptionMapper.map(it) }
                     throwable?.let { return@onErrorResumeNext Single.error<LoginResponse>(it) }
                 }
                 return@onErrorResumeNext Single.error<LoginResponse>(it)

@@ -68,4 +68,7 @@ dependencies {
     implementation 'com.github.bumptech.glide:glide:4.3.0'
     kapt 'com.github.bumptech.glide:compiler:4.3.0'
     implementation 'com.github.bumptech.glide:okhttp3-integration:4.3.0'
+
+    implementation 'io.nlopez.smartlocation:library:3.3.3'
+    implementation 'io.nlopez.smartlocation:rx:3.3.3'
 }

@@ -190,6 +190,6 @@ class LoginActivity : BaseActivity<LoginContract.LoginPresenter>(), LoginContrac
     }
 
     companion object {
-        const val PICK_PHOTO = 1
+        private const val PICK_PHOTO = 1
     }
 }

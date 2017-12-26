@@ -6,6 +6,7 @@ import android.support.design.widget.FloatingActionButton
 import android.support.v4.view.ViewCompat
 import android.util.AttributeSet
 import android.view.View
+import android.view.View.INVISIBLE
 
 
 class FabHideOnScrollBehavior(context: Context, attrs: AttributeSet) : FloatingActionButton.Behavior(context, attrs) {
@@ -25,7 +26,12 @@ class FabHideOnScrollBehavior(context: Context, attrs: AttributeSet) : FloatingA
         if (!enabled) return
 
         if (child.isShown && dyConsumed > 0) {
-            child.hide()
+            child.hide(object : FloatingActionButton.OnVisibilityChangedListener() {
+                override fun onHidden(fab: FloatingActionButton?) {
+                    super.onHidden(fab)
+                    fab?.visibility = INVISIBLE
+                }
+            })
         } else if (!child.isShown && dyConsumed < 0) {
             child.show()
         }

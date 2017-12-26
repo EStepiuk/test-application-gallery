@@ -1,5 +1,6 @@
 package com.yevhen_stepiuk.testgallery.injection.authorized
 
+import com.yevhen_stepiuk.testgallery.presentation.main.add_photo.AddPhotoActivity
 import com.yevhen_stepiuk.testgallery.presentation.main.main.MainActivity
 import dagger.Subcomponent
 
@@ -9,6 +10,8 @@ import dagger.Subcomponent
 interface AuthorizedComponent {
 
     fun inject(mainActivity: MainActivity)
+
+    fun inject(addPhotoActivity: AddPhotoActivity)
 
     @Subcomponent.Builder
     interface Builder {

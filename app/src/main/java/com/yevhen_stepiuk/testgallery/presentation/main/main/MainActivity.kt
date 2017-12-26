@@ -17,6 +17,7 @@ import com.yevhen_stepiuk.testgallery.extension.getColorCompat
 import com.yevhen_stepiuk.testgallery.extension.getErrorMessage
 import com.yevhen_stepiuk.testgallery.extension.headerView
 import com.yevhen_stepiuk.testgallery.presentation.base.BaseActivity
+import com.yevhen_stepiuk.testgallery.presentation.main.add_photo.AddPhotoActivity
 import com.yevhen_stepiuk.testgallery.presentation.main.login.LoginActivity
 import icepick.State
 import kotlinx.android.synthetic.main.main_activity.*
@@ -86,7 +87,7 @@ class MainActivity : BaseActivity<MainContract.MainPresenter>(), NavigationView.
     }
 
     override fun openAddPhotoScreen() {
-        //TODO: implement
+        startActivity(Intent(this, AddPhotoActivity::class.java))
     }
 
     override fun openLoginScreen() {
